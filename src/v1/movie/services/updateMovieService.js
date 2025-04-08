@@ -5,12 +5,12 @@ export default async function updateMovieService ({
   id,
   title,
   description,
-  release_date,
+  releaseDate,
   duration
 }) {
   const [result] = await connection.query(
     'UPDATE movies set title = ?, description = ?, release_date = ?, duration = ? WHERE id = ?;',
-    [title, description, release_date, duration, id]
+    [title, description, releaseDate, duration, id]
   )
 
   if (result.affectedRows === 0) {
@@ -21,7 +21,7 @@ export default async function updateMovieService ({
     id,
     title,
     description,
-    release_date,
+    releaseDate,
     duration
   }
 }

@@ -13,7 +13,7 @@ export default function getByIdMovieController (req, res) {
         return res.status(404).json({ message: err.message })
       }
 
-      console.log(err.message)
+      console.log('Error: ', err.message)
       res.status(500).json({ message: 'Lo sentimos, ocurrió un error' })
     })
 }

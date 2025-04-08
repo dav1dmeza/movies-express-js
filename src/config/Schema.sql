@@ -1,6 +1,8 @@
-CREATE DATABASE movies_app CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+DROP DATABASE IF EXISTS moviesdb;
 
-USE movies_app;
+CREATE DATABASE moviesdb CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+
+USE moviesdb;
 
 CREATE TABLE movies (
     id INT NOT NULL AUTO_INCREMENT,
