@@ -1,6 +1,6 @@
-import MovieNotFoundException from '../exceptions/MovieNotFoundException.js';
-import parseData from '../schema/MovieSchema.js';
-import updateMovieService from '../services/updateMovieService.js';
+import MovieNotFoundException from '../exceptions/MovieNotFoundException.js'
+import parseData from '../schema/MovieSchema.js'
+import updateMovieService from '../services/updateMovieService.js'
 
 export default function updateMovieController (req, res) {
   const {
@@ -8,7 +8,7 @@ export default function updateMovieController (req, res) {
     body
   } = req
 
-  const [error, movie] = parseData(body);
+  const [error, movie] = parseData(body)
 
   if (error) {
     return res.status(400).json({ message: error })

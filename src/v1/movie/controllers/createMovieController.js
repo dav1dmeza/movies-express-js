@@ -1,10 +1,10 @@
-import parseData from '../schema/MovieSchema.js';
-import createMovieService from '../services/createMovieService.js';
+import parseData from '../schema/MovieSchema.js'
+import createMovieService from '../services/createMovieService.js'
 
 export default function createMovieController (req, res) {
-  const { body } = req;
+  const { body } = req
 
-  const [error, movie] = parseData(body);
+  const [error, movie] = parseData(body)
 
   if (error) {
     return res.status(400).json({ message: error })
