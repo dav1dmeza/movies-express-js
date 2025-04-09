@@ -14,7 +14,7 @@ function toNumeber (value, defaultValue) {
   return result
 }
 
-export default async function getAllMoviesService ({ limit, page }) {
+export default async function getAllMoviesService ({ limit, page, title }) {
   const DEFAULT_LIMIT = 10
   const DEFAULT_PAGE = 1
 
@@ -23,11 +23,21 @@ export default async function getAllMoviesService ({ limit, page }) {
 
   const offset = (currentPage - 1) * currentLimit
 
-  const [count] = await connection.query('SELECT COUNT(*) AS total FROM movies;')
+  let queryStringCount = 'SELECT COUNT(*) AS total FROM movies'
+  let queryStringRows = 'SELECT id, title, description, release_date AS releaseDate, duration FROM movies'
+  const params = []
+
+  if (title) {
+    queryStringCount += ' WHERE title LIKE ?'
+    queryStringRows += ' WHERE title LIKE ?'
+    params.push(`%${title}%`)
+  }
+
+  const [count] = await connection.query(`${queryStringCount};`, params)
 
   const [results] = await connection.query(
-    'SELECT id, title, description, release_date AS releaseDate, duration FROM movies LIMIT ? OFFSET ?;',
-    [currentLimit, offset]
+    `${queryStringRows}`,
+    [...params, currentLimit, offset]
   )
 
   const totalPage = Math.ceil(count[0].total / currentLimit)
