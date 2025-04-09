@@ -1,6 +1,6 @@
 import connection from '../../../config/database.js'
 
-function toNumeber (value, defaultValue) {
+function toNumber (value, defaultValue) {
   const result = parseInt(value)
 
   if (isNaN(result)) {
@@ -18,8 +18,8 @@ export default async function getAllMoviesService ({ limit, page, title }) {
   const DEFAULT_LIMIT = 10
   const DEFAULT_PAGE = 1
 
-  const currentLimit = toNumeber(limit, DEFAULT_LIMIT)
-  const currentPage = toNumeber(page, DEFAULT_PAGE)
+  const currentLimit = toNumber(limit, DEFAULT_LIMIT)
+  const currentPage = toNumber(page, DEFAULT_PAGE)
 
   const offset = (currentPage - 1) * currentLimit
 
@@ -36,7 +36,7 @@ export default async function getAllMoviesService ({ limit, page, title }) {
   const [count] = await connection.query(`${queryStringCount};`, params)
 
   const [results] = await connection.query(
-    `${queryStringRows}`,
+    `${queryStringRows};`,
     [...params, currentLimit, offset]
   )
 
